@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  php:
+    build:
+      context: ..
+      dockerfile: ./docker/php/Dockerfile
+    container_name: ${COMPOSE_PHP_CONTAINER_NAME}
+    ports:
+      - '${COMPOSE_PHP_PORT}:80'
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ../src/:/var/www/html/
