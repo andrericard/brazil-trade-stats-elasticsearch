@@ -1,9 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "andrericard/brazil-trade-stats-elasticsearch",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "description": "Brazil Trade Statistics using Elasticsearch.",
+    "license": "AGPL-3.0-only",
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
