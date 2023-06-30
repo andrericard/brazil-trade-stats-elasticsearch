@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('charts/{chartName}', [\App\Http\Controllers\Api\ChartController::class, 'getChartData'])
+    ->whereIn('chartName', \App\Enums\ChartEnum::toArray());
+
+Route::get('autocomplete', [\App\Http\Controllers\Api\ChartController::class, 'getAutocompleteData']);

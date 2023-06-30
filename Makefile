@@ -5,8 +5,14 @@ install:
 	@docker exec -u 1000 $(PHP) composer install
 	@docker exec $(PHP) php artisan key:generate
 
+build:
+	@docker-compose -f ./src/docker-compose.yml build
+
 up:
-	@docker-compose -f ./src/docker-compose.yml up --build -d
+	@docker-compose -f ./src/docker-compose.yml up -d
+
+seed:
+	@docker exec -it -u 1000 $(PHP) php artisan db:seed
 
 down:
 	@docker-compose -f ./src/docker-compose.yml down

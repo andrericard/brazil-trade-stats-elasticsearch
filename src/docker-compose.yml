@@ -1,14 +1,38 @@
-version: '3.8'
+version: "3.8"
+
+networks:
+
+  default:
 
 services:
 
+  elasticsearch:
+    container_name: ${COMPOSE_ELASTICSEARCH_CONTAINER_NAME}
+    environment:
+      - "discovery.type=single-node"
+      - "xpack.security.enabled=false"
+    image: elasticsearch:8.6.2
+    networks:
+      - default
+    ports:
+      - "9200:9200"
+    restart: unless-stopped
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
   php:
     build:
-      context: ..
+      context: ../
       dockerfile: ./docker/php/Dockerfile
     container_name: ${COMPOSE_PHP_CONTAINER_NAME}
+    networks:
+      - default
     ports:
-      - '${COMPOSE_PHP_PORT}:80'
-    restart: ${COMPOSE_RESTART_POLICY}
+      - "${COMPOSE_PHP_PORT}:80"
+    restart: unless-stopped
     volumes:
       - ../src/:/var/www/html/
+
+volumes:
+
+  elasticsearch:
